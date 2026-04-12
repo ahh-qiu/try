@@ -1,0 +1,446 @@
+<!-- user.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心 - 通化杨靖宇专网</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- 公共样式与脚本 -->
+    <link rel="stylesheet" href="css/common.css">
+    <script src="js/common.js"></script>
+    <!-- 用户中心独有样式与脚本 -->
+    <link rel="stylesheet" href="css/user.css">
+    <script src="js/user.js"></script>
+</head>
+<body>
+    <!-- 未登录提示 -->
+    <div class="no-login" id="noLoginTip">
+        <i class="ri-user-unfollow-line no-login-icon"></i>
+        <div class="no-login-text">请先登录，即将跳转到登录页...</div>
+        <button class="no-login-btn" onclick="window.location.href='index.html'">立即登录</button>
+    </div>
+
+    <!-- 导航栏 -->
+    <nav class="top-nav" id="topNav" style="display: none;">
+        <div class="nav-title">
+            <i class="ri-user-3-fill"></i>
+            个人中心
+        </div>
+        <div class="nav-right">
+            <button class="btn-back" id="backBtn">
+                <i class="ri-arrow-left-line"></i> 返回地图
+            </button>
+            <button class="btn-logout" id="logoutBtn">
+                <i class="ri-logout-box-line"></i> 退出登录
+            </button>
+        </div>
+    </nav>
+
+    <!-- 个人中心容器 -->
+    <div class="user-container" id="userContainer" style="display: none;">
+        <!-- 侧边栏 -->
+        <div class="user-sidebar">
+            <div class="user-avatar">
+                <i class="ri-user-fill"></i>
+            </div>
+            <div class="user-name" id="userName">用户名</div>
+            <div class="user-role" id="userRole">普通用户</div>
+            <div class="user-badges" id="userBadges"></div>
+            <div class="user-ip-info" id="userIpInfo">
+                注册IP：<span id="showRegisterIp"></span><br>
+                注册省份：<span id="showRegisterProvince"></span><br>
+                最后登录IP：<span id="showLastLoginIp"></span><br>
+                最后登录省份：<span id="showLastLoginProvince"></span>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="menu-item active">
+                    <a href="javascript:;">
+                        <i class="ri-user-info-line"></i>
+                        个人信息
+                    </a>
+                </li>
+                <li class="menu-item" id="lightRecordMenu">
+                    <a href="javascript:;">
+                        <i class="ri-map-2-line"></i>
+                        点亮记录
+                    </a>
+                </li>
+                <li class="menu-item" id="adminMenu">
+                    <a href="javascript:;">
+                        <i class="ri-settings-3-line"></i>
+                        管理员面板
+                    </a>
+                </li>
+                <li class="menu-item" id="privateChatMenu">
+    <a href="javascript:;">
+        <i class="ri-chat-1-line"></i>
+        私聊记录
+    </a>
+</li>
+<li class="menu-item" id="myCommentsMenu">
+    <a href="javascript:;">
+        <i class="ri-chat-quote-line"></i>
+        我的评论
+    </a>
+</li>
+                <li class="menu-item" id="myReportsMenu">
+    <a href="javascript:;"><i class="ri-alert-line"></i> 举报记录</a>
+</li>
+<li class="menu-item" id="msgManageMenu">
+    <a href="javascript:;"><i class="ri-discuss-line"></i> 留言管理</a>
+</li>
+
+            </ul>
+        </div>
+
+        <!-- 主内容区 -->
+        <div class="user-main">
+            <div class="main-title" id="mainTitle">
+                <i class="ri-user-info-line"></i>
+                个人信息
+            </div>
+
+            <!-- 个人信息表单 -->
+            <form class="info-form" id="infoForm">
+                <div class="form-group">
+                    <label class="form-label">用户名</label>
+                    <input type="text" class="form-input" id="editUsername" placeholder="请输入用户名" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">注册IP</label>
+                    <input type="text" class="form-input" id="editRegisterIp" placeholder="注册IP" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">性别</label>
+                    <select class="form-select" id="editGender">
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                        <option value="保密">保密</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">最后登录IP</label>
+                    <input type="text" class="form-input" id="editLastLoginIp" placeholder="最后登录IP" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">家乡</label>
+                    <select class="form-select" id="editHometown">
+                        <option value="">请选择家乡省份</option>
+                        <option value="北京市">北京市</option>
+                        <option value="上海市">上海市</option>
+                        <option value="江苏省">江苏省</option>
+                        <option value="浙江省">浙江省</option>
+                        <option value="安徽省">安徽省</option>
+                        <option value="福建省">福建省</option>
+                        <option value="江西省">江西省</option>
+                        <option value="山东省">山东省</option>
+                        <option value="河南省">河南省</option>
+                        <option value="湖北省">湖北省</option>
+                        <option value="湖南省">湖南省</option>
+                        <option value="广东省">广东省</option>
+                        <option value="海南省">海南省</option>
+                        <option value="四川省">四川省</option>
+                        <option value="贵州省">贵州省</option>
+                        <option value="云南省">云南省</option>
+                        <option value="陕西省">陕西省</option>
+                        <option value="甘肃省">甘肃省</option>
+                        <option value="青海省">青海省</option>
+                        <option value="河北省">河北省</option>
+                        <option value="山西省">山西省</option>
+                        <option value="内蒙古自治区">内蒙古自治区</option>
+                        <option value="辽宁省">辽宁省</option>
+                        <option value="吉林省">吉林省</option>
+                        <option value="黑龙江省">黑龙江省</option>
+                        <option value="广西壮族自治区">广西壮族自治区</option>
+                        <option value="西藏自治区">西藏自治区</option>
+                        <option value="宁夏回族自治区">宁夏回族自治区</option>
+                        <option value="新疆维吾尔自治区">新疆维吾尔自治区</option>
+                        <option value="重庆市">重庆市</option>
+                        <option value="天津市">天津市</option>
+                        <option value="台湾省">台湾省</option>
+<option value="香港特别行政区">香港特别行政区</option>
+<option value="澳门特别行政区">澳门特别行政区</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">联系电话</label>
+                    <input type="tel" class="form-input" id="editPhone" placeholder="请输入联系电话">
+                </div>
+                <button type="button" class="btn-save" id="saveInfoBtn">保存修改</button>
+            </form>
+            <div id="startChatBtnContainer" style="display: none; text-align: center; margin-top: 20px;">
+    <button id="startChatBtn" class="btn-save" style="background: #c8102e;">发起私聊</button>
+</div>
+
+            <!-- 管理员面板（扩展） -->
+            <div class="admin-panel" id="adminPanel" style="display: none;">
+    <div class="admin-title">
+        <i class="ri-shield-user-line"></i>
+        管理员操作面板
+    </div>
+
+    <!-- 操作列表（可折叠） -->
+    <div class="admin-actions-list">
+        <!-- 重置用户点亮记录 -->
+        <div class="admin-collapse-item">
+            <div class="collapse-header" data-target="resetLight">
+                <i class="ri-arrow-right-s-line"></i>
+                <span>重置用户点亮记录</span>
+            </div>
+            <div class="collapse-body" id="resetLightBody" style="display: none;">
+                <div class="form-group">
+                    <label class="form-label">用户ID</label>
+                    <input type="text" class="form-input" id="resetUserId" placeholder="请输入要重置的用户ID">
+                </div>
+                <button class="admin-btn" id="resetLightBtn">执行重置</button>
+                <p class="form-tip" style="color:#999; margin-top:8px;">⚠️ 此功能开发中</p>
+            </div>
+        </div>
+
+        <!-- 批量导入点亮数据 -->
+        <div class="admin-collapse-item">
+            <div class="collapse-header" data-target="importData">
+                <i class="ri-arrow-right-s-line"></i>
+                <span>批量导入点亮数据</span>
+            </div>
+            <div class="collapse-body" id="importDataBody" style="display: none;">
+                <div class="form-group">
+                    <label class="form-label">选择文件</label>
+                    <input type="file" class="form-input" id="importFile" accept=".xlsx,.csv">
+                </div>
+                <button class="admin-btn" id="importDataBtn">导入数据</button>
+                <p class="form-tip" style="color:#999; margin-top:8px;">⚠️ 此功能开发中</p>
+            </div>
+        </div>
+
+        <!-- 修改用户权限 -->
+        <div class="admin-collapse-item">
+            <div class="collapse-header" data-target="changeRole">
+                <i class="ri-arrow-right-s-line"></i>
+                <span>修改用户权限</span>
+            </div>
+            <div class="collapse-body" id="changeRoleBody" style="display: none;">
+                <div class="form-group">
+                    <label class="form-label">用户ID</label>
+                    <input type="text" class="form-input" id="changeRoleUserId" placeholder="请输入用户ID">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">新权限</label>
+                    <select class="form-select" id="newRole">
+                        <option value="user">普通用户</option>
+                        <option value="admin">管理员</option>
+                    </select>
+                </div>
+                <button class="admin-btn" id="changeRoleBtn">修改权限</button>
+                <p class="form-tip" style="color:#999; margin-top:8px;">⚠️ 此功能开发中</p>
+            </div>
+        </div>
+
+        <!-- 修改省份点亮次数 -->
+        <div class="admin-collapse-item">
+            <div class="collapse-header" data-target="updateProvince">
+                <i class="ri-arrow-right-s-line"></i>
+                <span>修改省份点亮次数</span>
+            </div>
+            <div class="collapse-body" id="updateProvinceBody" style="display: none;">
+                <div class="form-group">
+                    <label class="form-label">省份</label>
+                    <select class="form-select" id="adminProvince">
+                        <option value="">请选择省份</option>
+                        <option value="北京市">北京市</option>
+                                <option value="上海市">上海市</option>
+                                <option value="天津市">天津市</option>
+                                <option value="重庆市">重庆市</option>
+                                <option value="河北省">河北省</option>
+                                <option value="山西省">山西省</option>
+                                <option value="辽宁省">辽宁省</option>
+                                <option value="吉林省">吉林省</option>
+                                <option value="黑龙江省">黑龙江省</option>
+                                <option value="江苏省">江苏省</option>
+                                <option value="浙江省">浙江省</option>
+                                <option value="安徽省">安徽省</option>
+                                <option value="福建省">福建省</option>
+                                <option value="江西省">江西省</option>
+                                <option value="山东省">山东省</option>
+                                <option value="河南省">河南省</option>
+                                <option value="湖北省">湖北省</option>
+                                <option value="湖南省">湖南省</option>
+                                <option value="广东省">广东省</option>
+                                <option value="海南省">海南省</option>
+                                <option value="四川省">四川省</option>
+                                <option value="贵州省">贵州省</option>
+                                <option value="云南省">云南省</option>
+                                <option value="陕西省">陕西省</option>
+                                <option value="甘肃省">甘肃省</option>
+                                <option value="青海省">青海省</option>
+                                <option value="内蒙古自治区">内蒙古自治区</option>
+                                <option value="广西壮族自治区">广西壮族自治区</option>
+                                <option value="西藏自治区">西藏自治区</option>
+                                <option value="宁夏回族自治区">宁夏回族自治区</option>
+                                <option value="新疆维吾尔自治区">新疆维吾尔自治区</option>
+                        <option value="台湾省">台湾省</option>
+<option value="香港特别行政区">香港特别行政区</option>
+<option value="澳门特别行政区">澳门特别行政区</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">新次数</label>
+                    <input type="number" class="form-input" id="adminLightCount" min="0">
+                </div>
+                <button class="admin-btn" id="updateProvinceLightBtn">更新</button>
+            </div>
+        </div>
+
+        <!-- 删除用户 -->
+        <div class="admin-collapse-item">
+            <div class="collapse-header" data-target="deleteUser">
+                <i class="ri-arrow-right-s-line"></i>
+                <span>删除用户</span>
+            </div>
+            <div class="collapse-body" id="deleteUserBody" style="display: none;">
+                <div class="form-group">
+                    <label class="form-label">用户ID</label>
+                    <input type="text" class="form-input" id="adminDeleteUserId">
+                </div>
+                <button class="admin-btn" id="deleteUserBtn">删除用户</button>
+            </div>
+        </div>
+
+        <!-- 重置用户密码 -->
+        <div class="admin-collapse-item">
+            <div class="collapse-header" data-target="resetPassword">
+                <i class="ri-arrow-right-s-line"></i>
+                <span>重置用户密码</span>
+            </div>
+            <div class="collapse-body" id="resetPasswordBody" style="display: none;">
+                <div class="form-group">
+                    <label class="form-label">用户ID</label>
+                    <input type="text" class="form-input" id="adminResetPwdUserId">
+                </div>
+                <button class="admin-btn" id="resetPasswordBtn">重置为123456</button>
+            </div>
+        </div>
+
+        <!-- 新增：敏感词管理 -->
+        <div class="admin-collapse-item">
+            <div class="collapse-header" data-target="sensitiveWord">
+                <i class="ri-arrow-right-s-line"></i>
+                <span>敏感词管理</span>
+            </div>
+            <div class="collapse-body" id="sensitiveWordBody" style="display: none;">
+                <div class="form-group">
+                    <label class="form-label">添加敏感词</label>
+                    <input type="text" class="form-input" id="newSensitiveWord" placeholder="请输入新的敏感词">
+                </div>
+                <button class="admin-btn" id="addSensitiveWordBtn">添加</button>
+                <p class="form-tip" style="margin-top:8px;">⚠️ 添加后立即生效，所有留言将自动过滤</p>
+                <hr style="margin: 15px 0;">
+                <button class="admin-btn" id="refreshSensitiveCacheBtn" style="background:#6c757d;">刷新敏感词缓存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- 点亮记录 -->
+            <div class="light-record" id="lightRecordSection">
+                <table class="record-table">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>点亮省份</th>
+                            <th>点亮城市</th>
+                            <th>点亮IP</th>
+                            <th>点亮时间</th>
+                            <th>致敬内容</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recordList">
+                        <!-- 动态加载记录 -->
+                    </tbody>
+                </table>
+            </div>
+            <!-- 私聊界面容器 -->
+<div id="privateChatSection" style="display: none;">
+    <div id="conversationList" class="conversation-list">
+        <!-- 会话列表将动态加载 -->
+    </div>
+    <div id="chatDetail" style="display: none;">
+        <div class="chat-header">
+            <span id="chatWithName"></span>
+            <button id="closeChatBtn" class="close-chat-btn">返回列表</button>
+        </div>
+        <div id="chatMessages" class="chat-messages"></div>
+        <div class="chat-input-area">
+            <textarea id="chatInput" rows="2" placeholder="输入消息..."></textarea>
+            <button id="sendChatBtn" class="btn-send">发送</button>
+        </div>
+    </div>
+</div>
+
+<!-- 我的评论容器 -->
+<div id="myCommentsSection" style="display: none;">
+    <div id="myCommentsList" class="my-comments-list">
+        <!-- 动态加载 -->
+    </div>
+</div>
+            <!-- 我的举报记录容器 -->
+<div id="myReportsSection" style="display: none;">
+    <div id="myReportsList" class="my-reports-list"></div>
+</div>
+
+<!-- 留言管理容器（管理员专用） -->
+<div id="msgManageSection" style="display: none;">
+    <div class="main-title">
+        <i class="ri-discuss-line"></i> 留言管理
+    </div>
+    <div class="manage-tabs">
+        <button class="manage-tab active" data-tab="comments">留言精选</button>
+        <button class="manage-tab" data-tab="commentReports">留言举报</button>
+        <button class="manage-tab" data-tab="messageReports">私聊举报</button>
+    </div>
+    <!-- 留言精选列表 -->
+    <div id="manageCommentsPanel" class="manage-panel"></div>
+    <!-- 留言举报列表 -->
+    <div id="manageCommentReportsPanel" class="manage-panel" style="display: none;">
+        <div class="report-status-filters">
+            <button class="status-filter-btn active" data-status="pending">待处理</button>
+            <button class="status-filter-btn" data-status="resolved">已处理</button>
+            <button class="status-filter-btn" data-status="dismissed">已驳回</button>
+            <button class="status-filter-btn" data-status="all">全部</button>
+        </div>
+        <div id="commentReportsList"></div>
+    </div>
+    <!-- 私聊举报列表 -->
+    <div id="manageMessageReportsPanel" class="manage-panel" style="display: none;">
+        <div class="report-status-filters">
+            <button class="status-filter-btn active" data-status="pending">待处理</button>
+            <button class="status-filter-btn" data-status="resolved">已处理</button>
+            <button class="status-filter-btn" data-status="dismissed">已驳回</button>
+            <button class="status-filter-btn" data-status="all">全部</button>
+        </div>
+        <div id="messageReportsList"></div>
+    </div>
+</div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+<div class="auth-modal" id="reportModal">
+    <div class="auth-container">
+        <div class="auth-header">
+            <div class="auth-header-title">举报</div>
+            <i class="ri-close-line auth-close" id="reportClose"></i>
+        </div>
+        <div class="auth-form active">
+            <div class="form-group">
+                <label class="form-label">举报原因</label>
+                <textarea id="reportReason" rows="4" class="form-input" placeholder="请详细描述举报原因..."></textarea>
+            </div>
+            <button id="submitReportBtn" class="btn-submit">提交举报</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
