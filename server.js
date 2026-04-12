@@ -7,7 +7,10 @@ const Ip2Region = require('ip2region').default;
 const app = express();
 const PORT = 3000;
 
-app.use(cors());
+app.use(cors({
+    origin: true,
+    credentials: true
+}));
 // 托管当前目录下的所有静态文件（包括 .mp4、.css、.js 等）
 app.use(express.static(__dirname));
 app.use(express.json());
