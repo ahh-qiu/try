@@ -1,5 +1,5 @@
 // common.js - 公共脚本
-const API_BASE_URL = 'https://b578761.r39.cpolar.top/api';
+const API_BASE_URL = 'https://6f38d68f.r39.cpolar.top/api';
 const TOKEN_KEY = "yangjingyu_token";
 
 // 省份名称映射
